@@ -101,7 +101,7 @@ dual_bottom = "no"; // [no:No, yes:Yes]
 use_reinforcement = "no"; // [no:No, yes:Yes]
 
 // If your printer prints the blocks correctly except for the stud diameter, use this variable to resize just the studs for your printer. A value of 1.05 will print the studs 105% wider than standard.
-stud_rescale = 1.00;
+stud_rescale = 1.00; // [1.0:0.001:2.0]
 //stud_rescale = 1.0475 * 1; // Orion Delta, T-Glase
 //stud_rescale = 1.022 * 1; // Orion Delta, ABS
 
@@ -182,7 +182,7 @@ module block(
     stud_spacing=(brand == "lego" ? 8 : 8 * 2);
     block_height=compute_block_height(type, brand);
     pin_diameter=(brand == "lego" ? 3 : 3 * 2);
-    post_diameter=(brand == "lego" ? 6.5 : 13.2);
+    post_diameter=(brand == "lego" ? 6.5 * stud_rescale : 13.2);
     cylinder_precision=(brand == "lego" ? 0.1 : 0.05);
     reinforcing_width = (brand == "lego" ? 0.7 : 1);
 
