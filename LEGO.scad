@@ -193,7 +193,7 @@ module block(
     stud_spacing=(brand == "lego" ? 8 : 8 * 2);
     block_height=compute_block_height(type, brand);
     pin_diameter=(brand == "lego" ? 3 : 3 * 2);
-    post_diameter=(brand == "lego" ? 6.5 * stud_rescale : 13.2);
+    post_diameter=(brand == "lego" ? 6.5 * stud_rescale : 13.2);  // JFF 6.5 to 6.55
     cylinder_precision=(brand == "lego" ? 0.1 : 0.05);
     reinforcing_width = (brand == "lego" ? 0.7 : 1);
 
