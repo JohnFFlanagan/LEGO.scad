@@ -92,7 +92,7 @@ roadway_invert = false; // [false:False, true:True]
 round_radius = 3;
 
 // Should the rounded edges be notched to accept studs below?
-round_stud_notches = "yes";
+round_stud_notches = "yes"; // [yes:Yes, no:No]
 
 /* [SNOT] */
 
@@ -134,7 +134,7 @@ translate([0, 0, (block_type == "tile" ? block_height_ratio * block_height : 0)]
         wing_type=wing_type,
         wing_end_width=wing_end_width,
         wing_base_length=wing_base_length,
-        stud_notches=(wing_stud_notches=="yes" || round_stud_notches=="yes"),
+        stud_notches=( block_type == "wing" && wing_stud_notches=="yes" || block_type == "round" && round_stud_notches=="yes"),
         slope_stud_rows=slope_stud_rows,
         slope_end_height=slope_end_height,
         curve_stud_rows=curve_stud_rows,
@@ -193,7 +193,7 @@ module block(
     stud_spacing=(brand == "lego" ? 8 : 8 * 2);
     block_height=compute_block_height(type, brand);
     pin_diameter=(brand == "lego" ? 3 : 3 * 2);
-    post_diameter=(brand == "lego" ? 6.5 * stud_rescale : 13.2);  // JFF 6.5 to 6.55
+    post_diameter=(brand == "lego" ? 6.5 * stud_rescale : 13.2);
     cylinder_precision=(brand == "lego" ? 0.1 : 0.05);
     reinforcing_width = (brand == "lego" ? 0.7 : 1);
 
@@ -787,7 +787,7 @@ module block(
 
     module subtract_stud_notches() {
         translate([overall_length/2, overall_width/2, -.001])
-            translate([0, 0, -(1/3 * block_height)]) block(
+            translate([0, 0, -(1/3 * block_height)]) rotate([0,0, block_type == "wing" ? 90:0]) block(
                 width=real_width,
                 length=real_length,
                 height=1/3,
