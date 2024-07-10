@@ -13,7 +13,7 @@ block_width = 2;
 block_length = 6;
 
 // Height of the block. A ratio of "1" is a standard LEGO brick height; a ratio of "1/3" is a standard LEGO plate height; "1/2" is a standard DUPLO plate.
-block_height_ratio = 1; // [.33333333333:1/3, .5:1/2, 1:1, 1.5:1 1/2, 2:2, 3:3, 4:4, 5:5, 6:6, 7:7, 8:8, 9:9, 10:10]
+block_height_ratio = 1; // [.33333333333:1/3, .5:1/2, .6666666666:2/3, 1:1, 1.5:1 1/2, 2:2, 3:3, 4:4, 5:5, 6:6, 7:7, 8:8, 9:9, 10:10]
 
 // What type of block should this be? For type-specific options, see the "Wings," "Slopes," "Curves", and "Baseplates" tabs.
 block_type = "brick"; // [brick:Brick, tile:Tile, wing:Wing, slope:Slope, curve:Curve, baseplate:Baseplate, round:Round]
@@ -118,7 +118,7 @@ stud_rescale = 1.00; // [1.0:0.001:2.0]
 stud_top_roundness = 0; // [0:0.01:1]
 
 // Print tiles upside down.
-translate([0, 0, (block_type == "tile" ? block_height_ratio * block_height : 0)]) rotate([0, (block_type == "tile" ? 180 : 0), 0]) {
+translate([0, 0, (block_type == "tile" ? block_height_ratio * compute_block_height(block_type, block_brand) : 0)]) rotate([0, (block_type == "tile" ? 180 : 0), 0]) {
     block(
         width=block_width,
         length=block_length,
@@ -185,7 +185,7 @@ module block(
     dual_sided=false,
     dual_bottom=false
     ) {
-    post_wall_thickness = (brand == "lego" ? 0.85 : 1);
+    post_wall_thickness = (brand == "lego" ? 0.70 : 1);
     wall_thickness=(brand == "lego" ? 1.45 : 1.5);
     stud_diameter=(brand == "lego" ? 4.85 : 9.40);
     hollow_stud_inner_diameter = (brand == "lego" ? 3.1 : 6.7);
